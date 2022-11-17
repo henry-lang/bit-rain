@@ -126,16 +126,13 @@ outer:
 					depth[x+y*w] = z
 
 					color := tcell.NewRGBColor(0, int32(z), 0)
-					style := tcell.StyleDefault.Foreground(color)
-
-					depth[x+y*w] = z
 
 					screen.SetContent(
 						x,
 						y,
 						bits[i].Value,
 						nil,
-						style,
+						tcell.StyleDefault.Foreground(color),
 					)
 				}
 
