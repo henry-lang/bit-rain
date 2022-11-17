@@ -97,7 +97,7 @@ outer:
 				case *tcell.EventResize:
 					{
 						w, h = event.Size()
-
+						bits = createBits(w, h)
 						depth = make([]uint8, w*h)
 					}
 				}
@@ -119,7 +119,13 @@ outer:
 						continue
 					}
 
-					color := tcell.NewRGBColor(0, int32(bits[i].Z), 0)
+					if depth[x+y*w] >= z {
+						continue
+					}
+
+					depth[x+y*w] = z
+
+					color := tcell.NewRGBColor(0, int32(z), 0)
 					style := tcell.StyleDefault.Foreground(color)
 
 					depth[x+y*w] = z
